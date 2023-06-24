@@ -1,12 +1,15 @@
 import day from "../assets/icons/today.png";
 import week from "../assets/icons/week.png";
 import month from "../assets/icons/month.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StorageClass from "../modules/StorageClass";
+import Project from "../ui/Project";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
+  const { setActiveProject, activeProject } = useGlobalContext();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,6 +23,7 @@ const Sidebar = () => {
     setIsDeleted(!isDeleted);
     e.preventDefault();
     StorageClass.removeProject(project);
+    setActiveProject(null);
     setIsDeleted(!isDeleted);
   }
 
@@ -28,18 +32,22 @@ const Sidebar = () => {
       <article className="sidebar__list">
         <h3 className="sidebar__list__title">Home</h3>
         <ul>
-          <li className="sidebar__list__project">
-            <img src={day} width={30} />
-            Today
-          </li>
-          <li className="sidebar__list__project">
-            <img src={week} width={30} />
-            This Week
-          </li>
-          <li className="sidebar__list__project">
-            <img src={month} width={30} />
-            This Month
-          </li>
+          {StorageClass.getProjects()
+            .slice(0, 3)
+            .map((project, index) => {
+              return (
+                <Project
+                  key={project.name}
+                  project={project}
+                  icon={
+                    (index === 0 && day) ||
+                    (index === 1 && week) ||
+                    (index === 2 && month)
+                  }
+                  handleDelete={handleDelete}
+                />
+              );
+            })}
         </ul>
       </article>
       <article className="sidebar__list user-projects">
@@ -49,18 +57,11 @@ const Sidebar = () => {
             .slice(3)
             .map((project) => {
               return (
-                <div
+                <Project
                   key={project.name}
-                  className="sidebar__list__project group relative"
-                >
-                  <h2>{project.name}</h2>
-                  <button
-                    onClick={(e) => handleDelete(e, project)}
-                    className="project__btn btn--icon absolute right-1 hidden"
-                  >
-                    <i className="fa-solid fa-trash-can"></i>
-                  </button>
-                </div>
+                  project={project}
+                  handleDelete={handleDelete}
+                />
               );
             })}
         </ul>

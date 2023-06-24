@@ -2,11 +2,13 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import ActiveProject from "./components/ActiveProject";
 import { useGlobalContext } from "./context/GlobalContext";
-import { useEffect } from "react";
+import TaskForm from "./components/TaskForm";
 
 function App() {
+  const { taskForm } = useGlobalContext();
   return (
     <main>
+      {taskForm && <TaskForm />}
       <Header />
       <Sidebar />
       <ActiveProject />

@@ -25,18 +25,25 @@
     @apply shadow-none;
   }
 
-  input {
-    @apply p-2 rounded-sm;
+  input,
+  textarea,
+  select,
+  option {
+    @apply p-2 rounded-sm bg-gray-100;
+  }
+
+  textarea {
+    @apply resize-none;
   }
 }
 
 main {
-  @apply min-h-screen min-w-full grid grid-rows-[min-content_1fr] grid-cols-[300px_1fr];
+  @apply relative min-h-screen w-full grid grid-rows-[min-content_1fr] grid-cols-[300px_1fr];
 }
 
 /*======================================== comment ======================================== */
 .header {
-  @apply w-full relative bg-gray-400 p-5 text-white font-bold flex content-center
+  @apply w-full relative bg-blue-400 p-5 text-white font-bold flex content-center
   justify-center items-center col-span-2;
 
   .dummy {
@@ -53,7 +60,7 @@ main {
 
 /*======================================== comment ======================================== */
 .sidebar {
-  @apply pt-5 pb-5 bg-gray-200 px-5;
+  @apply pt-5 pb-5 bg-blue-300 px-5;
 
   .dummy {
   }
@@ -64,7 +71,7 @@ main {
 
   .sidebar__list__project {
     @apply flex gap-x-2.5 rounded-md  items-center py-3 px-3 cursor-pointer capitalize 
-    hover:bg-gray-300;
+    hover:bg-blue-100;
   }
 
   .project__btn {
@@ -98,6 +105,144 @@ main {
 }
 
 /*======================================== comment ======================================== */
-/* .activeProject {
-  @apply ;
-} */
+.active-project {
+  @apply bg-blue-100 py-10 flex flex-col items-center;
+
+  .dummy {
+  }
+
+  .active-project__header {
+    @apply w-11/12 flex flex-wrap justify-between items-end px-3 border-b-2 border-b-black 
+    border-solid pb-2;
+  }
+
+  .active-project__header__title {
+    @apply text-3xl font-bold w-full text-center pb-4 capitalize;
+  }
+
+  .active__project__header__task-count {
+    @apply mb-[-6px] text-xl;
+  }
+
+  .task-count {
+    @apply font-bold;
+  }
+
+  .active__project__header__add-btn {
+    @apply rounded-full text-xl py-3;
+  }
+
+  .active__project__header__add-btn__icon {
+    @apply group-hover:rotate-180 duration-300 pointer-events-auto;
+  }
+
+  .active-project__tasks {
+    @apply w-full px-10 py-5 flex flex-col gap-y-5;
+  }
+
+  .active-project__tasks__task {
+    @apply relative shadow-md;
+  }
+
+  .task--low {
+    @apply border-solid border-t-4 border-green-300;
+  }
+  .task--medium {
+    @apply border-solid border-t-4 border-yellow-300;
+  }
+  .task--high {
+    @apply border-solid border-t-4 border-red-300;
+  }
+
+  .task__container {
+    @apply flex bg-white items-center justify-between px-3 py-5;
+  }
+
+  .task__container__details__form {
+    @apply grid place-items-center;
+  }
+
+  .task__container__details__name {
+    @apply font-medium capitalize;
+  }
+
+  .task__container__details {
+    @apply flex items-center gap-x-8;
+  }
+
+  .task__container__details.first {
+    @apply gap-x-4;
+  }
+
+  .task__container__details__priority {
+    @apply text-center w-[90px] border-[1px] border-solid rounded-3xl hidden md:block;
+  }
+
+  .task__container__details__date {
+    @apply font-light text-gray-700;
+  }
+
+  .priority--low {
+    @apply text-green-800 bg-green-100 border-green-300;
+  }
+  .priority--medium {
+    @apply text-yellow-800 bg-yellow-100 border-yellow-300;
+  }
+  .priority--high {
+    @apply text-red-800 bg-red-100 border-red-300;
+  }
+
+  .task__container__details__functionality {
+    @apply flex gap-x-3 relative;
+  }
+
+  .task__container__details__functionality__btn--delete,
+  .task__container__details__functionality__btn--edit {
+    @apply px-0 py-0 shadow-none text-xl;
+  }
+
+  .task__container__details__functionality__btn--delete i,
+  .task__container__details__functionality__btn--edit i {
+    @apply font-normal;
+  }
+
+  .task__container--description {
+    @apply p-5 bg-gray-100 border-solid border-gray-200 border-t-2;
+  }
+}
+
+/*======================================== comment ======================================== */
+.task-form {
+  @apply bg-black/25 absolute z-10 top-0 right-0 w-full h-screen backdrop-blur-sm grid place-items-center;
+
+  .dummy {
+  }
+
+  .task-form__form {
+    @apply shadow-lg bg-white rounded-md;
+  }
+
+  .task-form__form__fieldset {
+    @apply flex flex-col gap-y-5;
+  }
+
+  .task-form__form__fieldset__legend {
+    @apply rounded-t-md text-center text-3xl font-bold capitalize bg-blue-300 w-full py-6 mb-4;
+  }
+
+  .task-form__form__fieldset__input-cont {
+    @apply px-7 flex flex-col gap-y-1.5;
+  }
+
+  .task-form__form__fieldset__input-cont__label {
+    @apply font-semibold capitalize;
+  }
+
+  .task-form__form__fieldset__btn-cont {
+    @apply flex px-7 justify-end gap-x-6 py-6;
+  }
+
+  .task-form__form__btn {
+    @apply w-full;
+  }
+}

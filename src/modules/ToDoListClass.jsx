@@ -25,6 +25,12 @@ export default class ToDoListClass {
     return this.projects;
   }
 
+  getProject(project) {
+    return this.projects.find(
+      (currProject) => project.name === currProject.name
+    );
+  }
+
   deleteProject(project) {
     this.projects = this.projects.filter(
       (currProj) => currProj.name !== project.name

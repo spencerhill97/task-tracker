@@ -1,5 +1,6 @@
 import ProjectClass from "./ProjectClass";
 import ToDoListClass from "./ToDoListClass";
+import TaskClass from "./TaskClass";
 
 export default class StorageClass {
   static saveStorage(data) {
@@ -17,6 +18,14 @@ export default class StorageClass {
         .getProjects()
         .map((project) => Object.assign(new ProjectClass(), project))
     );
+
+    todoList
+      .getProjects()
+      .forEach((project) =>
+        project.setTasks(
+          project.getTasks().map((task) => Object.assign(new TaskClass(), task))
+        )
+      );
 
     return todoList;
   }
@@ -39,7 +48,19 @@ export default class StorageClass {
   }
 
   static getProject(project) {
-    const todoList = StorageClass.getStorage();
+    const todoList = StorageClass.getProjects();
     return todoList.find((currProject) => currProject.name === project.name);
+  }
+
+  static addTask(project, task) {
+    const todoList = StorageClass.getStorage();
+    todoList.getProject(project).addTask(task);
+    StorageClass.saveStorage(todoList);
+  }
+
+  static deleteTask(project, task) {
+    const todoList = StorageClass.getStorage();
+    todoList.getProject(project).deleteTask(task);
+    StorageClass.saveStorage(todoList);
   }
 }

@@ -21,14 +21,14 @@ export default class ProjectClass {
   }
 
   deleteTask(task) {
-    this.tasks = this.tasks.filter((currTask) => task.name !== currTask);
+    this.tasks = this.tasks.filter((currTask) => task.name !== currTask.name);
   }
 
   getTasks() {
     return this.tasks;
   }
 
-  setTasks() {
-    this.tasks = tasks;
+  setTasks(currentTasks) {
+    this.tasks = currentTasks;
   }
 }

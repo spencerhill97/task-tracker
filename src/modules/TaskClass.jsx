@@ -1,10 +1,10 @@
-export default class Task {
-  constructor(name, notes, priority, completed, dueDate) {
+export default class TaskClass {
+  constructor(name, description, dueDate, priority) {
     this.name = name;
-    this.notes = notes;
-    this.priority = priority;
-    this.completed = completed;
+    this.description = description;
     this.dueDate = dueDate;
+    this.priority = priority;
+    this.completed = false;
   }
 
   getTask() {
@@ -15,8 +15,8 @@ export default class Task {
     this.name = newName;
   }
 
-  setNotes(newNotes) {
-    this.notes = newNotes;
+  setDescription(newDescription) {
+    this.description = newDescription;
   }
 
   setPriority(newPriority) {
