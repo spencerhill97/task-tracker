@@ -6,9 +6,9 @@ export const useGlobalContext = () => useContext(GlobalContext);
 
 const AppContext = ({ children }) => {
   const [activeProject, setActiveProject] = useState(null);
+  const [activeTask, setActiveTask] = useState(null);
   const [addTaskForm, setAddTaskForm] = useState(false);
   const [editTaskForm, setEditTaskForm] = useState(false);
-  const [currentTask, setCurrentTask] = useState(null);
 
   const value = {
     setActiveProject,
@@ -17,6 +17,8 @@ const AppContext = ({ children }) => {
     setAddTaskForm,
     editTaskForm,
     setEditTaskForm,
+    setActiveTask,
+    activeTask,
   };
 
   return (

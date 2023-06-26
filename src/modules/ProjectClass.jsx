@@ -16,8 +16,12 @@ export default class ProjectClass {
     this.tasks.push(task);
   }
 
-  getTask(name) {
-    return this.tasks.filter((currTask) => currTask.name === name)[0];
+  getTask(task) {
+    if (typeof task === "string") {
+      return this.tasks.find((currTask) => currTask.name === task);
+    }
+
+    return this.tasks.find((currTask) => currTask.name === task.name);
   }
 
   deleteTask(task) {

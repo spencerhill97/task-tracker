@@ -1,15 +1,41 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
-import TaskClass from "../modules/TaskClass";
 import StorageClass from "../modules/StorageClass";
 
 const EditTaskForm = () => {
-  const { editTaskFormForm, setEditTaskForm } = useGlobalContext();
+  const {
+    editTaskForm,
+    setEditTaskForm,
+    activeTask,
+    setActiveTask,
+    activeProject,
+    setActiveProject,
+  } = useGlobalContext();
 
   const ref = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const name = document.querySelector(".name-input");
+    const description = document.querySelector(".description-input");
+    const date = document.querySelector(".date-input");
+    const priority = document.querySelector(".priority-input");
+    // const project = document.querySelector(".project-input");
+
+    console.log(date.value);
+    console.log(priority.value);
+
+    StorageClass.setTask(activeProject.name, activeTask, {
+      name: name.value,
+      description: description.value,
+      dueDate: date.value,
+      priority: priority.value,
+    });
+
+    setActiveProject(StorageClass.getStorage().getProject(activeProject.name));
+
+    setEditTaskForm(!editTaskForm);
+    setActiveTask(null);
   };
 
   const handleClick = (e) => {
@@ -38,7 +64,7 @@ const EditTaskForm = () => {
               id="name"
               required
               className="name-input"
-              defaultValue="spencer hill"
+              defaultValue={activeTask.name}
             />
           </div>
           <div className="task-form__form__fieldset__input-cont">
@@ -55,6 +81,7 @@ const EditTaskForm = () => {
               cols="33"
               placeholder="Write your notes here!"
               className="description-input"
+              defaultValue={activeTask.description}
             ></textarea>
           </div>
           <div className="task-form__form__fieldset__input-cont">
@@ -64,7 +91,13 @@ const EditTaskForm = () => {
             >
               due date
             </label>
-            <input className="date-input" type="date" name="date" id="date" />
+            <input
+              className="date-input"
+              type="date"
+              name="date"
+              id="date"
+              defaultValue={activeTask.dueDate}
+            />
           </div>
           <div className="task-form__form__fieldset__input-cont">
             <label
@@ -73,20 +106,30 @@ const EditTaskForm = () => {
             >
               priority
             </label>
-            <select className="priority-input" name="priority" id="priority">
+            <select
+              className="priority-input"
+              name="priority"
+              id="priority"
+              defaultValue={activeTask.priority}
+            >
               <option value="low">low</option>
               <option value="medium">medium</option>
               <option value="high">high</option>
             </select>
           </div>
-          <div className="task-form__form__fieldset__input-cont">
+          {/* <div className="task-form__form__fieldset__input-cont">
             <label
               className="task-form__form__fieldset__input-cont__label"
               htmlFor="project"
             >
               project
             </label>
-            <select className="project-input" name="project" id="project">
+            <select
+              className="project-input"
+              name="project"
+              id="project"
+              defaultValue={activeProject && activeProject.name}
+            >
               {Array.from(StorageClass.getProjects()).map((project, index) => {
                 return (
                   <option key={index} value={project.name}>
@@ -95,7 +138,7 @@ const EditTaskForm = () => {
                 );
               })}
             </select>
-          </div>
+          </div> */}
           <div className="task-form__form__fieldset__btn-cont">
             <button type="submit" className="task-form__form__btn btn--green">
               update

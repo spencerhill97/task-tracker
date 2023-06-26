@@ -3,9 +3,9 @@ import ProjectClass from "./ProjectClass";
 export default class ToDoListClass {
   constructor() {
     this.projects = [];
+    this.projects.push(new ProjectClass("all tasks"));
     this.projects.push(new ProjectClass("today"));
     this.projects.push(new ProjectClass("this week"));
-    this.projects.push(new ProjectClass("this month"));
   }
 
   setProjects(currProjects) {
@@ -35,6 +35,14 @@ export default class ToDoListClass {
     );
   }
 
+  getTask(project, task) {
+    if (typeof task === "string") {
+      return this.getProject(project).getTask(task);
+    }
+
+    return this.getProject(project).getTask(task.name);
+  }
+
   deleteProject(project) {
     this.projects = this.projects.filter(
       (currProj) => currProj.name !== project.name
@@ -43,5 +51,17 @@ export default class ToDoListClass {
 
   addTask(project, task) {
     this.getProject(project).addTask(task);
+  }
+
+  setTask(project, task, { ...obj }) {
+    this.getProject(project)
+      .getTask(task)
+      .setTask(
+        obj.name,
+        obj.description,
+        obj.dueDate,
+        obj.priority,
+        obj.completed
+      );
   }
 }

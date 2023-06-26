@@ -5,10 +5,6 @@ import Task from "../ui/Task";
 const ActiveProject = () => {
   const { activeProject, addTaskForm, setAddTaskForm } = useGlobalContext();
 
-  const handleClick = () => {
-    setAddTaskForm(!addTaskForm);
-  };
-
   return (
     <section className="active-project">
       <div className="active-project__header">
@@ -22,7 +18,7 @@ const ActiveProject = () => {
           {activeProject && activeProject.tasks.length === 1 ? "task" : "tasks"}
         </p>
         <button
-          onClick={handleClick}
+          onClick={() => setAddTaskForm(!addTaskForm)}
           className="active__project__header__add-btn group btn--green"
         >
           <i className="active__project__header__add-btn__icon fa-solid fa-plus"></i>

@@ -4,7 +4,8 @@ import TaskClass from "../modules/TaskClass";
 import StorageClass from "../modules/StorageClass";
 
 const AddTaskForm = () => {
-  const { addTaskForm, setAddTaskForm, activeProject } = useGlobalContext();
+  const { addTaskForm, setAddTaskForm, activeProject, setActiveProject } =
+    useGlobalContext();
 
   const ref = useRef(null);
 
@@ -25,7 +26,10 @@ const AddTaskForm = () => {
 
     if (activeProject && activeProject.name === project.value) {
       StorageClass.addTask(activeProject, Object.assign(newTask));
-      activeProject.addTask(Object.assign(newTask));
+      // activeProject.addTask(Object.assign(newTask));
+      setActiveProject(
+        StorageClass.getStorage().getProject(activeProject.name)
+      );
     } else {
       StorageClass.addTask(project.value, Object.assign(newTask));
     }

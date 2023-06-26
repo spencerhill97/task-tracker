@@ -62,9 +62,29 @@ export default class StorageClass {
     StorageClass.saveStorage(todoList);
   }
 
+  static getTask(project, task) {
+    const todoList = StorageClass.getStorage();
+    console.log(todoList.getProject(project).getTask(task));
+    return todoList.getProject(project).getTask(task);
+  }
+
   static deleteTask(project, task) {
     const todoList = StorageClass.getStorage();
     todoList.getProject(project).deleteTask(task);
+    StorageClass.saveStorage(todoList);
+  }
+
+  static setTask(project, task, { ...obj }) {
+    const todoList = StorageClass.getStorage();
+    todoList
+      .getTask(project, task)
+      .setTask(
+        obj.name,
+        obj.description,
+        obj.dueDate,
+        obj.priority,
+        obj.completed
+      );
     StorageClass.saveStorage(todoList);
   }
 }

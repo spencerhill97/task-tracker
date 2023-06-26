@@ -1,6 +1,6 @@
 import day from "../assets/icons/today.png";
 import week from "../assets/icons/week.png";
-import month from "../assets/icons/month.png";
+import star from "../assets/icons/star-all.png";
 import { useState } from "react";
 import StorageClass from "../modules/StorageClass";
 import Project from "../ui/Project";
@@ -40,9 +40,9 @@ const Sidebar = () => {
                   key={project.name}
                   project={project}
                   icon={
-                    (index === 0 && day) ||
-                    (index === 1 && week) ||
-                    (index === 2 && month)
+                    (index === 1 && day) ||
+                    (index === 2 && week) ||
+                    (index === 0 && star)
                   }
                   handleDelete={handleDelete}
                 />
@@ -51,7 +51,7 @@ const Sidebar = () => {
         </ul>
       </article>
       <article className="sidebar__list user-projects">
-        <h3 className="sidebar__list__title">Projects</h3>
+        <h3 className="sidebar__list__title">My Projects</h3>
         <ul>
           {StorageClass.getProjects()
             .slice(3)
