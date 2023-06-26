@@ -9,7 +9,7 @@ import { useGlobalContext } from "../context/GlobalContext";
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
-  const { setActiveProject, activeProject } = useGlobalContext();
+  const { setActiveProject, setActiveUser } = useGlobalContext();
 
   function handleSubmit(e) {
     e.preventDefault();

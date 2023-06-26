@@ -2,13 +2,15 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import ActiveProject from "./components/ActiveProject";
 import { useGlobalContext } from "./context/GlobalContext";
-import TaskForm from "./components/TaskForm";
+import AddTaskForm from "./components/AddTaskForm";
+import EditTaskForm from "./components/EditTaskForm";
 
 function App() {
-  const { taskForm } = useGlobalContext();
+  const { addTaskForm, editTaskForm } = useGlobalContext();
   return (
     <main>
-      {taskForm && <TaskForm />}
+      {addTaskForm && <AddTaskForm />}
+      {editTaskForm && <EditTaskForm />}
       <Header />
       <Sidebar />
       <ActiveProject />

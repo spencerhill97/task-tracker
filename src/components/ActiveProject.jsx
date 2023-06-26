@@ -1,11 +1,12 @@
+import { useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 import Task from "../ui/Task";
 
 const ActiveProject = () => {
-  const { activeProject, taskForm, setTaskForm } = useGlobalContext();
+  const { activeProject, addTaskForm, setAddTaskForm } = useGlobalContext();
 
   const handleClick = () => {
-    setTaskForm(!taskForm);
+    setAddTaskForm(!addTaskForm);
   };
 
   return (
@@ -15,7 +16,10 @@ const ActiveProject = () => {
           {activeProject ? activeProject.name : "Active Project"}
         </h2>
         <p className="active__project__header__task-count">
-          <span className="task-count">1</span> task
+          <span className="task-count">
+            {activeProject === null ? "0" : activeProject.tasks.length}
+          </span>{" "}
+          {activeProject && activeProject.tasks.length === 1 ? "task" : "tasks"}
         </p>
         <button
           onClick={handleClick}
@@ -26,7 +30,7 @@ const ActiveProject = () => {
       </div>
       <article className="active-project__tasks">
         {activeProject &&
-          activeProject.getTasks().map((task, index) => {
+          activeProject.getTasks().map((task) => {
             return (
               <Task
                 key={`${task.name ? task.name : ""}${Math.random()}`}

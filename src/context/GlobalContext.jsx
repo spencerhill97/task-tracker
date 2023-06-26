@@ -6,9 +6,18 @@ export const useGlobalContext = () => useContext(GlobalContext);
 
 const AppContext = ({ children }) => {
   const [activeProject, setActiveProject] = useState(null);
-  const [taskForm, setTaskForm] = useState(false);
+  const [addTaskForm, setAddTaskForm] = useState(false);
+  const [editTaskForm, setEditTaskForm] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null);
 
-  const value = { setActiveProject, activeProject, taskForm, setTaskForm };
+  const value = {
+    setActiveProject,
+    activeProject,
+    addTaskForm,
+    setAddTaskForm,
+    editTaskForm,
+    setEditTaskForm,
+  };
 
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>

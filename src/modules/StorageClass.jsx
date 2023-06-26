@@ -49,6 +49,10 @@ export default class StorageClass {
 
   static getProject(project) {
     const todoList = StorageClass.getProjects();
+    if (typeof project === "string") {
+      return todoList.find((currProject) => currProject.name === project);
+    }
+
     return todoList.find((currProject) => currProject.name === project.name);
   }
 

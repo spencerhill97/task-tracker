@@ -1,36 +1,20 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 import TaskClass from "../modules/TaskClass";
-import Storage from "../modules/StorageClass";
+import StorageClass from "../modules/StorageClass";
 
-const TaskForm = () => {
-  const { taskForm, setTaskForm, activeProject } = useGlobalContext();
+const EditTaskForm = () => {
+  const { editTaskFormForm, setEditTaskForm } = useGlobalContext();
+
   const ref = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = document.querySelector(".name-input");
-    const description = document.querySelector(".description-input");
-    const date = document.querySelector(".date-input");
-    const priority = document.querySelector(".priority-input");
-
-    const newTask = new TaskClass(
-      name.value,
-      description.value,
-      date.value,
-      priority.value
-    );
-
-    Storage.addTask(activeProject, Object.assign(newTask));
-
-    activeProject.addTask(Object.assign(newTask));
-
-    console.log(activeProject.getTasks());
   };
 
   const handleClick = (e) => {
     if (ref.current && !!ref.current.contains(e.target)) return;
-    setTaskForm(!taskForm);
+    setEditTaskForm(!editTaskForm);
   };
 
   return (
@@ -38,7 +22,7 @@ const TaskForm = () => {
       <form ref={ref} onSubmit={handleSubmit} className="task-form__form">
         <fieldset className="task-form__form__fieldset">
           <legend className="task-form__form__fieldset__legend">
-            add task
+            edit task
           </legend>
           <div className="task-form__form__fieldset__input-cont">
             <label
@@ -54,6 +38,7 @@ const TaskForm = () => {
               id="name"
               required
               className="name-input"
+              defaultValue="spencer hill"
             />
           </div>
           <div className="task-form__form__fieldset__input-cont">
@@ -94,12 +79,29 @@ const TaskForm = () => {
               <option value="high">high</option>
             </select>
           </div>
+          <div className="task-form__form__fieldset__input-cont">
+            <label
+              className="task-form__form__fieldset__input-cont__label"
+              htmlFor="project"
+            >
+              project
+            </label>
+            <select className="project-input" name="project" id="project">
+              {Array.from(StorageClass.getProjects()).map((project, index) => {
+                return (
+                  <option key={index} value={project.name}>
+                    {project.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <div className="task-form__form__fieldset__btn-cont">
             <button type="submit" className="task-form__form__btn btn--green">
-              submit
+              update
             </button>
             <button
-              onClick={() => setTaskForm(!taskForm)}
+              onClick={() => setEditTaskForm(!editTaskForm)}
               type="button"
               className="task-form__form__btn btn--red"
             >
@@ -112,4 +114,4 @@ const TaskForm = () => {
   );
 };
 
-export default TaskForm;
+export default EditTaskForm;

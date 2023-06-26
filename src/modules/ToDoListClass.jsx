@@ -26,8 +26,12 @@ export default class ToDoListClass {
   }
 
   getProject(project) {
+    if (typeof project === "string") {
+      return this.projects.find((currProject) => currProject.name === project);
+    }
+
     return this.projects.find(
-      (currProject) => project.name === currProject.name
+      (currProject) => currProject.name === project.name
     );
   }
 
@@ -35,5 +39,9 @@ export default class ToDoListClass {
     this.projects = this.projects.filter(
       (currProj) => currProj.name !== project.name
     );
+  }
+
+  addTask(project, task) {
+    this.getProject(project).addTask(task);
   }
 }

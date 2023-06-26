@@ -4,10 +4,12 @@ import { useGlobalContext } from "../context/GlobalContext";
 
 const Task = ({ task }) => {
   const [toggle, setToggle] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const { activeProject, setEditTaskForm, editTaskForm } = useGlobalContext();
+
   const checkRef = useRef(null);
   const deleteRef = useRef(null);
   const editRef = useRef(null);
-  const { setActiveProject, activeProject } = useGlobalContext();
 
   const handleToggle = (e) => {
     if (checkRef.current && !!checkRef.current.contains(e.target)) {
@@ -23,60 +25,69 @@ const Task = ({ task }) => {
 
   const handleDelete = (task) => {
     StorageClass.deleteTask(activeProject, task);
+    activeProject.deleteTask(task);
+    setIsDeleted(!isDeleted);
   };
 
   return (
-    <div
-      onClick={handleToggle}
-      className={`active-project__tasks__task ${
-        (task.priority === "low" && "task--low") ||
-        (task.priority === "medium" && "task--medium") ||
-        (task.priority === "high" && "task--high")
-      }`}
-    >
-      <div
-        className={`task__container ${
-          task.description ? "cursor-pointer" : ""
-        }`}
-      >
-        <div className="task__container__details first">
-          <form ref={checkRef} className="task__container__details__form">
-            <input type="checkbox" id="completed" name="completed" />
-          </form>
-          <h4 className="task__container__details__name">{task.name}</h4>
-        </div>
-        <div className="task__container__details">
-          <p
-            className={`task__container__details__priority ${
-              (task.priority === "low" && "priority--low") ||
-              (task.priority === "medium" && "priority--medium") ||
-              (task.priority === "high" && "priority--high")
+    <>
+      {isDeleted === false && (
+        <div
+          onClick={handleToggle}
+          className={`active-project__tasks__task ${
+            (task.priority === "low" && "task--low") ||
+            (task.priority === "medium" && "task--medium") ||
+            (task.priority === "high" && "task--high")
+          }`}
+        >
+          <div
+            className={`task__container ${
+              task.description ? "cursor-pointer" : ""
             }`}
           >
-            {task.priority}
-          </p>
-          <p className="task__container__details__date">{task.dueDate}</p>
-          <div className="task__container__details__functionality">
-            <button
-              ref={editRef}
-              className="task__container__details__functionality__btn--edit"
-            >
-              <i className="fa-solid fa-pen-to-square"></i>
-            </button>
-            <button
-              onClick={() => handleDelete(task)}
-              ref={deleteRef}
-              className="task__container__details__functionality__btn--delete"
-            >
-              <i className="fa-solid fa-trash-can"></i>
-            </button>
+            <div className="task__container__details first">
+              <form ref={checkRef} className="task__container__details__form">
+                <input type="checkbox" id="completed" name="completed" />
+              </form>
+              <h4 className="task__container__details__name">{task.name}</h4>
+            </div>
+            <div className="task__container__details">
+              <p
+                className={`task__container__details__priority ${
+                  (task.priority === "low" && "priority--low") ||
+                  (task.priority === "medium" && "priority--medium") ||
+                  (task.priority === "high" && "priority--high")
+                }`}
+              >
+                {task.priority}
+              </p>
+              <p className="task__container__details__date">{task.dueDate}</p>
+              <div className="task__container__details__functionality">
+                <button
+                  // onClick={setEditTaskForm(!editTaskForm)}
+                  ref={editRef}
+                  className="task__container__details__functionality__btn--edit"
+                >
+                  <i className="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button
+                  onClick={() => handleDelete(task)}
+                  ref={deleteRef}
+                  className="task__container__details__functionality__btn--delete"
+                >
+                  <i className="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
           </div>
+          {task.description && toggle && (
+            <div className="task__container--description">
+              {task.description}
+            </div>
+          )}
         </div>
-      </div>
-      {task.description && toggle && (
-        <div className="task__container--description">{task.description}</div>
       )}
-    </div>
+    </>
   );
 };
 
