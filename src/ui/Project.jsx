@@ -18,9 +18,9 @@ const Project = (project) => {
     >
       {project.icon ? <img src={project.icon} width="30px" alt="icon" /> : ""}
       <h2>{project.project.name}</h2>
-      {project.project.name !== "today" &&
+      {project.project.name !== "all tasks" &&
         project.project.name !== "this week" &&
-        project.project.name !== "this month" && (
+        project.project.name !== "today" && (
           <button
             ref={ref}
             onClick={(e) => project.handleDelete(e, project.project)}

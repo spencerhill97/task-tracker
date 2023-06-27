@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 import StorageClass from "../modules/StorageClass";
 
@@ -20,10 +20,6 @@ const EditTaskForm = () => {
     const description = document.querySelector(".description-input");
     const date = document.querySelector(".date-input");
     const priority = document.querySelector(".priority-input");
-    // const project = document.querySelector(".project-input");
-
-    console.log(date.value);
-    console.log(priority.value);
 
     StorageClass.setTask(activeProject.name, activeTask, {
       name: name.value,

@@ -230,7 +230,7 @@ main {
   }
 
   .task-form__form__fieldset__input-cont {
-    @apply px-7 flex flex-col gap-y-1.5;
+    @apply flex flex-col gap-y-1.5 px-5;
   }
 
   .task-form__form__fieldset__input-cont__label {

@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 import TaskClass from "../modules/TaskClass";
 import StorageClass from "../modules/StorageClass";
+import { isDateBefore } from "../functions/dateIsBefore";
 
 const AddTaskForm = () => {
   const { addTaskForm, setAddTaskForm, activeProject, setActiveProject } =
@@ -16,6 +17,11 @@ const AddTaskForm = () => {
     const date = document.querySelector(".date-input");
     const priority = document.querySelector(".priority-input");
     const project = document.querySelector(".project-input");
+
+    if (date.value !== "" && isDateBefore(date.value)) {
+      console.log("can't continue");
+      return;
+    }
 
     const newTask = new TaskClass(
       name.value,
@@ -96,42 +102,46 @@ const AddTaskForm = () => {
             </label>
             <input className="date-input" type="date" name="date" id="date" />
           </div>
-          <div className="task-form__form__fieldset__input-cont">
-            <label
-              className="task-form__form__fieldset__input-cont__label"
-              htmlFor="priority"
-              defaultValue="low"
-            >
-              priority
-            </label>
-            <select className="priority-input" name="priority" id="priority">
-              <option value="low">low</option>
-              <option value="medium">medium</option>
-              <option value="high">high</option>
-            </select>
-          </div>
-          <div className="task-form__form__fieldset__input-cont">
-            <label
-              className="task-form__form__fieldset__input-cont__label"
-              htmlFor="project"
-              defaultValue="this week"
-            >
-              project
-            </label>
-            <select
-              className="project-input"
-              name="project"
-              id="project"
-              defaultValue={activeProject ? activeProject.name : ""}
-            >
-              {Array.from(StorageClass.getProjects()).map((project, index) => {
-                return (
-                  <option key={index} value={project.name}>
-                    {project.name}
-                  </option>
-                );
-              })}
-            </select>
+          <div className="flex">
+            <div className="task-form__form__fieldset__input-cont w-3/4">
+              <label
+                className="task-form__form__fieldset__input-cont__label"
+                htmlFor="project"
+                defaultValue="this week"
+              >
+                project
+              </label>
+              <select
+                className="project-input"
+                name="project"
+                id="project"
+                defaultValue={activeProject ? activeProject.name : ""}
+              >
+                {Array.from(StorageClass.getProjects()).map(
+                  (project, index) => {
+                    return (
+                      <option key={index} value={project.name}>
+                        {project.name}
+                      </option>
+                    );
+                  }
+                )}
+              </select>
+            </div>
+            <div className="task-form__form__fieldset__input-cont">
+              <label
+                className="task-form__form__fieldset__input-cont__label"
+                htmlFor="priority"
+                defaultValue="low"
+              >
+                priority
+              </label>
+              <select className="priority-input" name="priority" id="priority">
+                <option value="low">low</option>
+                <option value="medium">medium</option>
+                <option value="high">high</option>
+              </select>
+            </div>
           </div>
           <div className="task-form__form__fieldset__btn-cont">
             <button type="submit" className="task-form__form__btn btn--green">
