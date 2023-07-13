@@ -34,10 +34,14 @@ const Task = ({ task }) => {
     setActiveProject(StorageClass.getStorage().getProject(activeProject.name));
   };
 
-  const handleCheckbox = (e) => {
+  const handleCheckbox = () => {
     StorageClass.toggleTaskComplete(activeProject.name, task);
     setActiveProject(StorageClass.getStorage().getProject(activeProject.name));
   };
+
+  useEffect(() => {
+    setIsChecked(task.completed);
+  }, []);
 
   return (
     <div
@@ -53,12 +57,13 @@ const Task = ({ task }) => {
           task.description ? "cursor-pointer" : ""
         }`}
       >
-        <div ref={checkRef} className="task__container__details first">
+        <div className="task__container__details first">
           <div
+            // ref={checkRef}
             className={`task__container__checkbox ${isChecked && "checked"}`}
             onClick={() => {
+              handleCheckbox();
               setIsChecked(!isChecked);
-              handleCheckbox;
             }}
           >
             {isChecked && <i className="fa-solid fa-check"></i>}

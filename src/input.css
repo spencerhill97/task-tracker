@@ -31,6 +31,11 @@
     @apply p-2 rounded-sm bg-gray-100;
   }
 
+  input[type="date"],
+  select {
+    @apply cursor-pointer;
+  }
+
   textarea {
     @apply resize-none;
   }
