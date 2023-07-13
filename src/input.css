@@ -37,13 +37,17 @@
 }
 
 main {
-  @apply relative min-h-screen w-full grid grid-rows-[min-content_1fr] grid-cols-[300px_1fr];
+  @apply min-h-screen h-full w-full flex flex-col;
+}
+
+/*======================================== comment ======================================== */
+.main-content {
+  @apply min-h-full flex grow w-full;
 }
 
 /*======================================== comment ======================================== */
 .header {
-  @apply w-full relative bg-blue-400 p-5 text-white font-bold flex content-center
-  justify-center items-center col-span-2;
+  @apply w-full relative bg-blue-400 p-5 text-white font-bold flex items-center justify-center h-max;
 
   .dummy {
   }
@@ -59,7 +63,7 @@ main {
 
 /*======================================== comment ======================================== */
 .sidebar {
-  @apply pt-5 pb-5 bg-blue-300 px-5;
+  @apply pt-5 pb-5 px-5 min-h-full bg-blue-300;
 
   .dummy {
   }
@@ -69,7 +73,7 @@ main {
   }
 
   .sidebar__list__project {
-    @apply flex gap-x-2.5 rounded-md  items-center py-3 px-3 cursor-pointer capitalize 
+    @apply flex gap-x-2.5 rounded-md  items-center py-3 px-3 cursor-pointer capitalize w-[250px]
     hover:bg-blue-100;
   }
 
@@ -82,7 +86,7 @@ main {
   }
 
   .createProject__form {
-    @apply flex flex-wrap justify-center gap-x-4 gap-y-4;
+    @apply flex flex-wrap w-[250px] justify-center gap-x-8 gap-y-4;
   }
 
   .createProject__form__input {
@@ -90,7 +94,7 @@ main {
   }
 
   .createProject__form__input__btn {
-    @apply w-[40%];
+    @apply w-[100px];
   }
 
   .createProject__btn {
@@ -105,7 +109,7 @@ main {
 
 /*======================================== comment ======================================== */
 .active-project {
-  @apply bg-blue-100 py-10 flex flex-col items-center;
+  @apply min-h-full bg-gray-200 py-10 flex flex-col items-center grow;
 
   .dummy {
   }
@@ -157,8 +161,12 @@ main {
     @apply flex bg-white items-center justify-between px-3 py-5;
   }
 
-  .task__container__details__form {
-    @apply grid place-items-center;
+  .task__container__checkbox {
+    @apply bg-white p-2 flex justify-center items-center cursor-pointer w-[20px] h-[20px] text-lg shadow-lg border-solid border border-gray-400;
+  }
+
+  .checked {
+    @apply bg-green-100 text-green-700 font-extrabold;
   }
 
   .task__container__details__name {

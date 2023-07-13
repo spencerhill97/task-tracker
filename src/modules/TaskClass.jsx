@@ -35,6 +35,10 @@ export default class TaskClass {
     this.completed = newCompleted;
   }
 
+  toggleComplete() {
+    this.completed = !this.completed;
+  }
+
   setDueDate(newDueDate) {
     this.dueDate = newDueDate;
   }

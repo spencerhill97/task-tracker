@@ -28,8 +28,8 @@ const Sidebar = () => {
   }
 
   return (
-    <section className="sidebar">
-      <article className="sidebar__list">
+    <article className="sidebar">
+      <div className="sidebar__list">
         <h3 className="sidebar__list__title">Home</h3>
         <ul>
           {StorageClass.getProjects()
@@ -49,8 +49,8 @@ const Sidebar = () => {
               );
             })}
         </ul>
-      </article>
-      <article className="sidebar__list user-projects">
+      </div>
+      <div className="sidebar__list user-projects">
         <h3 className="sidebar__list__title">My Projects</h3>
         <ul>
           {StorageClass.getProjects()
@@ -65,7 +65,7 @@ const Sidebar = () => {
               );
             })}
         </ul>
-      </article>
+      </div>
       <div className="sidebar__createProject">
         {isActive ? (
           <form className="createProject__form" onSubmit={handleSubmit}>
@@ -99,7 +99,7 @@ const Sidebar = () => {
           </button>
         )}
       </div>
-    </section>
+    </article>
   );
 };
 

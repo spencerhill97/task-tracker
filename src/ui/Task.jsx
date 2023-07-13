@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StorageClass from "../modules/StorageClass";
 import { useGlobalContext } from "../context/GlobalContext";
 
 const Task = ({ task }) => {
   const [toggle, setToggle] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const {
     activeProject,
     setActiveProject,
@@ -33,6 +34,11 @@ const Task = ({ task }) => {
     setActiveProject(StorageClass.getStorage().getProject(activeProject.name));
   };
 
+  const handleCheckbox = (e) => {
+    StorageClass.toggleTaskComplete(activeProject.name, task);
+    setActiveProject(StorageClass.getStorage().getProject(activeProject.name));
+  };
+
   return (
     <div
       onClick={handleToggle}
@@ -47,22 +53,19 @@ const Task = ({ task }) => {
           task.description ? "cursor-pointer" : ""
         }`}
       >
-        <div className="task__container__details first">
-          <form ref={checkRef} className="task__container__details__form">
-            <input type="checkbox" id="completed" name="completed" />
-          </form>
+        <div ref={checkRef} className="task__container__details first">
+          <div
+            className={`task__container__checkbox ${isChecked && "checked"}`}
+            onClick={() => {
+              setIsChecked(!isChecked);
+              handleCheckbox;
+            }}
+          >
+            {isChecked && <i className="fa-solid fa-check"></i>}
+          </div>
           <h4 className="task__container__details__name">{task.name}</h4>
         </div>
         <div className="task__container__details">
-          {/* <p
-                className={`task__container__details__priority ${
-                  (task.priority === "low" && "priority--low") ||
-                  (task.priority === "medium" && "priority--medium") ||
-                  (task.priority === "high" && "priority--high")
-                }`}
-              >
-                {task.priority}
-              </p> */}
           <p className="task__container__details__date">{task.dueDate}</p>
           <div className="task__container__details__functionality">
             <button

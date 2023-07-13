@@ -87,4 +87,10 @@ export default class StorageClass {
       );
     StorageClass.saveStorage(todoList);
   }
+
+  static toggleTaskComplete(project, task) {
+    const todoList = StorageClass.getStorage();
+    todoList.getTask(project, task).toggleComplete();
+    StorageClass.saveStorage(todoList);
+  }
 }

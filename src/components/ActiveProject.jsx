@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 import Task from "../ui/Task";
 
@@ -6,7 +5,7 @@ const ActiveProject = () => {
   const { activeProject, addTaskForm, setAddTaskForm } = useGlobalContext();
 
   return (
-    <section className="active-project">
+    <article className="active-project">
       <div className="active-project__header">
         <h2 className="active-project__header__title">
           {activeProject ? activeProject.name : "Active Project"}
@@ -24,7 +23,7 @@ const ActiveProject = () => {
           <i className="active__project__header__add-btn__icon fa-solid fa-plus"></i>
         </button>
       </div>
-      <article className="active-project__tasks">
+      <div className="active-project__tasks">
         {activeProject &&
           activeProject.getTasks().map((task) => {
             return (
@@ -34,8 +33,8 @@ const ActiveProject = () => {
               />
             );
           })}
-      </article>
-    </section>
+      </div>
+    </article>
   );
 };
 

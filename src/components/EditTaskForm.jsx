@@ -113,28 +113,6 @@ const EditTaskForm = () => {
               <option value="high">high</option>
             </select>
           </div>
-          {/* <div className="task-form__form__fieldset__input-cont">
-            <label
-              className="task-form__form__fieldset__input-cont__label"
-              htmlFor="project"
-            >
-              project
-            </label>
-            <select
-              className="project-input"
-              name="project"
-              id="project"
-              defaultValue={activeProject && activeProject.name}
-            >
-              {Array.from(StorageClass.getProjects()).map((project, index) => {
-                return (
-                  <option key={index} value={project.name}>
-                    {project.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div> */}
           <div className="task-form__form__fieldset__btn-cont">
             <button type="submit" className="task-form__form__btn btn--green">
               update

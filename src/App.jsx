@@ -12,8 +12,10 @@ function App() {
       {addTaskForm && <AddTaskForm />}
       {editTaskForm && <EditTaskForm />}
       <Header />
-      <Sidebar />
-      <ActiveProject />
+      <section className="main-content">
+        <Sidebar />
+        <ActiveProject />
+      </section>
     </main>
   );
 }
