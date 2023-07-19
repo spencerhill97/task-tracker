@@ -1,4 +1,5 @@
 import ProjectClass from "./ProjectClass";
+import isDateToday from "../utilities/dateIsToday";
 
 export default class ToDoListClass {
   constructor() {
@@ -51,6 +52,9 @@ export default class ToDoListClass {
 
   addTask(project, task) {
     this.getProject(project).addTask(task);
+    this.getProject("all tasks").addTask(task);
+
+    console.log(task.dueDate);
   }
 
   setTask(project, task, { ...obj }) {
@@ -64,4 +68,6 @@ export default class ToDoListClass {
         obj.completed
       );
   }
+
+  addTodaysTasks() {}
 }

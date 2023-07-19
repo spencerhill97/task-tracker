@@ -68,7 +68,15 @@ const Task = ({ task }) => {
           >
             {isChecked && <i className="fa-solid fa-check"></i>}
           </div>
-          <h4 className="task__container__details__name">{task.name}</h4>
+          <h4
+            className={`${
+              !isChecked
+                ? "task__container__details__name"
+                : "task__container__details__name--checked"
+            }`}
+          >
+            {task.name}
+          </h4>
         </div>
         <div className="task__container__details">
           <p className="task__container__details__date">{task.dueDate}</p>

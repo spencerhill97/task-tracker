@@ -178,6 +178,10 @@ main {
     @apply font-medium capitalize;
   }
 
+  .task__container__details__name--checked {
+    @apply font-medium capitalize text-gray-500 line-through decoration-2;
+  }
+
   .task__container__details {
     @apply flex items-center gap-x-8;
   }

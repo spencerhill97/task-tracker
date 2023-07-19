@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 import TaskClass from "../modules/TaskClass";
 import StorageClass from "../modules/StorageClass";
-import { isDateBefore } from "../functions/dateIsBefore";
+import isDateBefore from "../utilities/dateIsBefore";
+import isDateToday from "../utilities/dateIsToday";
 
 const AddTaskForm = () => {
   const { addTaskForm, setAddTaskForm, activeProject, setActiveProject } =
@@ -19,8 +20,14 @@ const AddTaskForm = () => {
     const project = document.querySelector(".project-input");
 
     if (date.value !== "" && isDateBefore(date.value)) {
-      console.log("can't continue");
+      console.log("The due date must be current or in the future.");
       return;
+    }
+
+    if (date.value !== "" && isDateToday(date.value)) {
+      console.log(true);
+    } else if (date.value !== "" && !isDateToday(date.value)) {
+      console.log(false);
     }
 
     const newTask = new TaskClass(

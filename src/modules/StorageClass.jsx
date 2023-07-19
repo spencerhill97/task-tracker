@@ -58,7 +58,7 @@ export default class StorageClass {
 
   static addTask(project, task) {
     const todoList = StorageClass.getStorage();
-    todoList.getProject(project).addTask(task);
+    todoList.addTask(project, task);
     StorageClass.saveStorage(todoList);
   }
 

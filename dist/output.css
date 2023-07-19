@@ -1058,6 +1058,22 @@ main {
   .task__container__details__name {
     text-transform: capitalize;
   }
+  .task__container__details__name--checked {
+    font-weight: 500;
+  }
+  .task__container__details__name--checked {
+    text-transform: capitalize;
+  }
+  .task__container__details__name--checked {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+  }
+  .task__container__details__name--checked {
+    text-decoration-line: line-through;
+  }
+  .task__container__details__name--checked {
+    text-decoration-thickness: 2px;
+  }
   .task__container__details {
     display: flex;
   }

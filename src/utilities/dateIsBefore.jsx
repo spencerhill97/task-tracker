@@ -1,6 +1,6 @@
 import { isBefore, format, parseISO } from "date-fns";
 
-export function isDateBefore(params) {
+export default function isDateBefore(params) {
   const date = params.split("-");
   const day = Number(date[2]);
   const month = Number(date[1] - 1);
